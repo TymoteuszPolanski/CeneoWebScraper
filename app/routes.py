@@ -16,15 +16,16 @@ def extract():
         product = Product(product_id)
         product.extract_name()
         if product.product_name:
-            product.extract_opnions().calculate_stats().draw_charts()
+            product.extract_opinions().calculate_stats().draw_charts()
+            product.export_opinions()
+            product.export_product()
+
+
         else: 
-            pass
+            error="Ups......coś poszło nie tak"
+            return render_template("extract.html.jinja", error=error)
 
         
-        if not os.path.exists("app/opinions"):
-            os.makedirs("app/opinions")           
-        with open(f"app/opinions/{product_id}.json", "w", encoding="UTF-8") as jf:
-            json.dump(all_opinions, jf, indent=4, ensure_ascii=False)
         return redirect(url_for('product', product_id=product_id))
     else:
         return render_template("extract.html.jinja")
@@ -40,4 +41,8 @@ def author():
 
 @app.route('/product/<product_id>')
 def product(product_id):
+    product = Product(product_id)
+    product= product.import_product()
+    stats = product.stats_to_dict()
+    opinions = product.opinions_to_df()
     return render_template("product.html.jinja", product_id=product_id, stats=stats, opinions=opinions)
