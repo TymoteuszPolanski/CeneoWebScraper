@@ -94,23 +94,30 @@ class Product():
         return self
 
 
-    def __str__(self) -> str:     
-        pass
+    def __str__(self) -> str:
+        return f"Data of the product: {self.product_id}, {self.product_name}, {self.opinions}, {self.opinions_count}, {self.pros_count}, {self.cons_count}, {self.average_score}"
 
     def __repr__(self) -> str:
-        pass
+        return f"Data of the product: {self.product_id}, {self.product_name}, {self.opinions}, {self.opinions_count}, {self.pros_count}, {self.cons_count}, {self.average_score}"
 
     def to_dict(self) -> dict:
-        pass
+        data = {
+            "product_id": self.product_id,
+            "product_name": self.product_name,
+            "opinions": self.opinions,
+            "opinions_count": self.opinions_count,
+            "pros_count": self.pros_count,
+            "cons_count": self.cons_count,
+            "average_score": self.average_score,
+        }
+        return data
 
     def export_opinions(self):
         if not os.path.exists("app/opinions"):
-            os.makedirs("app/opinions")           
+            os.makedirs("app/opinions")
         with open(f"app/opinions/{self.product_id}.json", "w", encoding="UTF-8") as jf:
             json.dump([opinion.to_dict() for opinion in self.opinions], jf, indent=4, ensure_ascii=False)
-
         pass
 
-    def export_product():
-
+    def export_product(self):
         pass

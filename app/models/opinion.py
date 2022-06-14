@@ -24,11 +24,24 @@ class Opinion():
         self.single_opinion["opinion_id"] = opinion["data-entry-id"]
         return self
 
-    def __str__(self) -> str:     
-        pass
+    def __str__(self) -> str:
+        return f"{self.author}, {self.recommendation}, {self.stars}, {self.content}, {self.useful}, {self.useless}, {self.publish_date}, {self.purchase_date}, {self.pros}, {self.cons}, {self.opinion_id}"
 
     def __repr__(self) -> str:
-        pass
+        return f"{self.author}, {self.recommendation}, {self.stars}, {self.content}, {self.useful}, {self.useless}, {self.publish_date}, {self.purchase_date}, {self.pros}, {self.cons}, {self.opinion_id}"
 
     def to_dict(self) -> dict:
-        pass
+        opinion ={
+            "author" : self.author,
+            "recommendation" : self.recommendation,
+            "stars" : self.stars, 
+            "content" : self.content,
+            "useful" : self.useful,
+            "useless" : self.useless,
+            "publish_date" : self.publish_date,
+            "purchase_date" : self.purchase_date,
+            "pros" : self.pros,
+            "cons" : self.cons,
+            "opinion_id" : self.opinion_id
+        }
+        return opinion
